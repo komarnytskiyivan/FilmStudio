@@ -1,4 +1,4 @@
-<?php include "config.php" ?>
+<?php include "../includes/config.php" ?>
 <header id="header">
       <div class="header__top">
         <div class="container">
@@ -9,8 +9,8 @@
           </div>
           <nav class="header__top__menu">
             <ul>
-              <li><a href="../">Главная</a></li>
-              <li><a href="../pages/about_me.php">Обо мне</a></li>
+              <li><a href="index.php">Главная</a></li>
+              <li><a href="about_me.php">Обо мне</a></li>
               <li><a href="https://vk.com">Я Вконтакте</a></li>
             </ul>
           </nav>

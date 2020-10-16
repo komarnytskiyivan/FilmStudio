@@ -1,5 +1,28 @@
 <?php
-  require "../includes/config.php"
+  require "../includes/config.php";
+                $per_page = 4;
+                $page = 1;
+                $categorie = 1;
+                if(isset($_GET['categorie'])){
+                  $categorie = (int) $_GET['categorie'];
+                }
+                if(isset($_GET['page'])){
+                  $page = (int) $_GET['page'];
+                }
+                $total_count_q = mysqli_query($connection,"SELECT COUNT(`id`) AS `total_count` FROM `articles` WHERE `categorie_id` = $categorie");
+                $total_count = mysqli_fetch_assoc($total_count_q);
+                $total_count = $total_count['total_count'];
+                $total_pages = ceil($total_count / $per_page);
+                if( $page <= 1 || $page > $total_pages){
+                    $page = 1;
+                }
+                $offset = ($per_page * $page) - $per_page;
+                $articles = mysqli_query($connection,"SELECT * FROM `articles` WHERE `categorie_id` = $categorie ORDER BY `id` DESC LIMIT $offset,$per_page");
+                $articles_exist = true;
+                if( mysqli_num_rows($articles) <= 0){
+                    echo 'There are no articles!!!';
+                    $articles_exist = false;
+                }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,30 +49,11 @@
         <div class="row">
           <section class="content__left col-md-8">
             <div class="block">
-              <a href="./articles.php">Все записи</a>
+              <a href="./index.php">На главную</a>
               <h3>Все статьи</h3>
               <div class="block__content">
                 <div class="articles articles__horizontal">
-                <?php 
-                $per_page = 4;
-                $page = 1;
-                if(isset($_GET['page'])){
-                    $page = (int) $_GET['page'];
-                }
-                $total_count_q = mysqli_query($connection,"SELECT COUNT(`id`) AS `total_count` FROM `articles`");
-                $total_count = mysqli_fetch_assoc($total_count_q);
-                $total_count = $total_count['total_count'];
-                $total_pages = ceil($total_count / $per_page);
-                if( $page <= 1 || $page > $total_pages){
-                    $page = 1;
-                }
-                    $offset = ($per_page * $page) - $per_page;
-                $articles = mysqli_query($connection,"SELECT * FROM `articles` ORDER BY `id` DESC LIMIT $offset,$per_page");
-                $articles_exist = true;
-                if( mysqli_num_rows($articles) <= 0){
-                    echo 'There are no articles!!!';
-                    $articles_exist = false;
-                }
+                <?php
                 while($art = mysqli_fetch_assoc($articles)){
                 ?>
                   <article class="article">
@@ -79,10 +83,10 @@
                 if($articles_exist == true){
                     echo '<div class="paginator">';
                     if( $page > 1){
-                        echo '<a href="./articles.php?page='.($page - 1).'">&laquo Прошлая страница</a>';
+                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page - 1).'">&laquo Прошлая страница</a>';
                     }
                     if( $page < $total_pages){
-                        echo '<a href="./articles.php?page='.($page + 1).'">Следующая страница &raquo</a>';
+                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page + 1).'">Следующая страница &raquo</a>';
                     }
                     echo '</div>';
                 }

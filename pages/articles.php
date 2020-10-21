@@ -9,7 +9,7 @@
                 if(isset($_GET['page'])){
                   $page = (int) $_GET['page'];
                 }
-                $total_count_q = mysqli_query($connection,"SELECT COUNT(`id`) AS `total_count` FROM `articles` WHERE `categorie_id` = $categorie");
+                $total_count_q = mysqli_query($connection,"SELECT COUNT(`id`) AS `total_count` FROM `films` WHERE `categorie_id` = $categorie");
                 $total_count = mysqli_fetch_assoc($total_count_q);
                 $total_count = $total_count['total_count'];
                 $total_pages = ceil($total_count / $per_page);
@@ -17,7 +17,7 @@
                     $page = 1;
                 }
                 $offset = ($per_page * $page) - $per_page;
-                $articles = mysqli_query($connection,"SELECT * FROM `articles` WHERE `categorie_id` = $categorie ORDER BY `id` DESC LIMIT $offset,$per_page");
+                $articles = mysqli_query($connection,"SELECT * FROM `films` WHERE `categorie_id` = $categorie ORDER BY `id` DESC LIMIT $offset,$per_page");
                 $articles_exist = true;
                 if( mysqli_num_rows($articles) <= 0){
                     echo 'There are no articles!!!';
@@ -49,8 +49,8 @@
         <div class="row">
           <section class="content__left col-md-8">
             <div class="block">
-              <a href="./index.php">На главную</a>
-              <h3>Все статьи</h3>
+              <a href="./index.php">На головну</a>
+              <h3>Всі фільми</h3>
               <div class="block__content">
                 <div class="articles articles__horizontal">
                 <?php
@@ -70,7 +70,7 @@
                           }
                         }
                         ?>
-                        <small>Категория: <a href="./articles.php?categorie=<?php echo $art_cat['id']; ?>"><?php echo $art_cat['title']; ?></a></small>
+                        <small>Категорія: <a href="./articles.php?categorie=<?php echo $art_cat['id']; ?>"><?php echo $art_cat['title']; ?></a></small>
                       </div>
                       <div class="article__info__preview"><?php echo mb_substr($art['text'], 0, 50, 'utf-8'); ?></div>
                     </div>
@@ -83,10 +83,10 @@
                 if($articles_exist == true){
                     echo '<div class="paginator">';
                     if( $page > 1){
-                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page - 1).'">&laquo Прошлая страница</a>';
+                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page - 1).'">&laquo Попередня сторінка</a>';
                     }
                     if( $page < $total_pages){
-                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page + 1).'">Следующая страница &raquo</a>';
+                        echo '<a href="./articles.php?categorie='.($categorie).'&page='.($page + 1).'">Наступна сторінка &raquo</a>';
                     }
                     echo '</div>';
                 }
@@ -100,7 +100,7 @@
         </div>
       </div>
     </div>
-    <?php include "../includes/footer.php"; ?>
+    <!-- <?php include "../includes/footer.php"; ?> -->
   </div>
 
 </body>

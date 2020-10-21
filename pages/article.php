@@ -22,7 +22,7 @@
 
   <?php include "../includes/header.php"; ?>
   <?php 
-    $article = mysqli_query($connection, "SELECT * FROM `articles` WHERE `id` = ". (int)$_GET['id']);
+    $article = mysqli_query($connection, "SELECT * FROM `films` WHERE `id` = ". (int)$_GET['id']);
     if( mysqli_num_rows($article) <= 0)
     {
   ?>
@@ -35,7 +35,7 @@
               <div class="block__content">
                 <img src="../media/images/post-image.jpg">
                 <div class="full-text">
-                Запрашиваемая вами статья не существует!!!
+                  Такого фільму в нас немає!
                </div>
               </div>
             </div>
@@ -46,14 +46,14 @@
     <?php
     } else {
       $art = mysqli_fetch_assoc($article);
-      mysqli_query($connection,"UPDATE `articles` SET `views` = `views` + 1 WHERE `id` = ". (int) $art['id']);
+      mysqli_query($connection,"UPDATE `films` SET `views` = `views` + 1 WHERE `id` = ". (int) $art['id']);
     ?>
     <div id="content">
       <div class="container">
         <div class="row">
           <section class="content__left col-md-8">
             <div class="block">
-              <a><?php echo $art['views']; ?> просмотров</a>
+              <a><?php echo $art['views']; ?> переглядів</a>
               <h3><?php echo $art['title']; ?></h3>
               <div class="block__content">
                 <img src="<?php echo $art['image']; ?>" style="max-width: 100%">
@@ -64,8 +64,8 @@
             </div>
 
             <div class="block">
-              <a href="#comment-add-form">Добавить свой</a>
-              <h3>Комментарии к статье</h3>
+              <a href="#comment-add-form">Додати свій</a>
+              <h3>Коментарі до фільму</h3>
               <div class="block__content">
                 <div class="articles articles__vertical">
                 <?php 
@@ -95,7 +95,7 @@
             </div>
 
             <div class="block" id="comment-add-form">
-              <h3>Добавить комментарий</h3>
+              <h3>Додати коментар</h3>
               <div class="block__content">
                 <form class="form" method="POST" >
                   <?php 
@@ -124,10 +124,10 @@
                   <div class="form__group">
                     <div class="row">
                       <div class="col-md-6">
-                        <input type="text" class="form__control"  name="name" placeholder="Имя" value="<?php echo $_POST['name']; ?>"> 
+                        <input type="text" class="form__control"  name="name" placeholder="Ім'я" value="<?php echo $_POST['name']; ?>"> 
                       </div>
                       <div class="col-md-6">
-                        <input type="text" class="form__control" required="" name="nickname" placeholder="Никнейм" value="<?php echo $_POST['nickname']; ?>">
+                        <input type="text" class="form__control" required="" name="nickname" placeholder="Нік" value="<?php echo $_POST['nickname']; ?>">
                       </div>
                       <div class="col-md-6">
                         <input type="text" class="form__control" required="" name="email" placeholder="email" value="<?php echo $_POST['email']; ?>">
@@ -135,10 +135,10 @@
                     </div>
                   </div>
                   <div class="form__group">
-                    <textarea name="text" required="" class="form__control" placeholder="Текст комментария ..."><?php echo $_POST['email']; ?></textarea>
+                    <textarea name="text" required="" class="form__control" placeholder="Текст коментаря ..."><?php echo $_POST['email']; ?></textarea>
                   </div>
                   <div class="form__group">
-                    <input type="submit" class="form__control" name="do_post" value="Добавить комментарий" action="/article.php?id=<?php echo art['id']; ?>#comment-add-form">
+                    <input type="submit" class="form__control" name="do_post" value="Додати коментар" action="/article.php?id=<?php echo art['id']; ?>#comment-add-form">
                   </div>
                 </form>
               </div>
@@ -153,7 +153,7 @@
     <?php 
     }
     ?>
-    <?php include "../includes/footer.php"; ?>
+    <!-- <?php include "../includes/footer.php"; ?> -->
 
   </div>
 

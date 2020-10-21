@@ -1,21 +1,21 @@
 <?php include "config.php" ?>
-<div class="block">
+            <!-- <div class="block">
               <h3>Мы_знаем</h3>
               <div class="block__content">
                 <script type="text/javascript" src="//ra.revolvermaps.com/0/0/6.js?i=02op3nb0crr&amp;m=7&amp;s=320&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
               </div>
-            </div>
+            </div> -->
 
             <div class="block">
-              <h3>Топ читаемых статей</h3>
+              <h3>Топ фільмів по переглядам</h3>
               <div class="block__content">
                 <div class="articles articles__vertical">
 
                 <?php 
-                $articles = mysqli_query($connection,"SELECT * FROM `articles` ORDER BY `views` DESC LIMIT 5");
+                $films = mysqli_query($connection,"SELECT * FROM `films` ORDER BY `views` DESC LIMIT 5");
                 ?>
                 <?php
-                while($art = mysqli_fetch_assoc($articles)){
+                while($art = mysqli_fetch_assoc($films)){
                 ?>
                   <article class="article">
                     <div class="article__image" style="background-image: url(<?php echo $art['image']; ?>);"></div>
@@ -45,7 +45,7 @@
             </div>
 
             <div class="block">
-              <h3>Комментарии</h3>
+              <h3>Коментарі</h3>
               <div class="block__content">
                 <div class="articles articles__vertical">
 

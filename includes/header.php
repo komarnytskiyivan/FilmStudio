@@ -1,6 +1,6 @@
 <?php include "../includes/config.php" ?>
 <header id="header">
-      <div class="header__top">
+      <!-- <div class="header__top">
         <div class="container">
           <div class="header__top__logo">
             <h1><?php 
@@ -15,9 +15,9 @@
             </ul>
           </nav>
         </div>
-      </div>
+      </div> -->
         <?php 
-        $categories = mysqli_query($connection,"SELECT * FROM `articles_categories`");
+        $categories = mysqli_query($connection,"SELECT * FROM `filmstudios`");
         ?>
       <div class="header__bottom">
         <div class="container">

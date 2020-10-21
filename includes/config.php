@@ -1,12 +1,12 @@
 <?php
 
 $config = array(
-    'title' => 'Simple Blog',
+    'title' => 'Кіностудія',
     'db' => array(
         'server' => 'localhost',
         'username' => 'root',
         'password' => 'root',
-        'name' => 'test_blog'
+        'name' => 'filmstudio'
     )
 );
 require "db.php";
